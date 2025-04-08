@@ -30,21 +30,21 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, walk_speed)
 
-	# Animation.
+	# Sprite direction.
 	if velocity.x > 0.1:
 		graphics.scale.x = 1
 	elif velocity.x < -0.1:
 		graphics.scale.x = -1
-		
-	if velocity:
+
+	# Animation.
+	if not is_on_floor():
+		if animation.current_animation != "jump":
+			animation.play("jump")
+	elif velocity:
 		if animation.current_animation != "run":
-			animation.play("RESET")
-			animation.advance(0)
 			animation.play("run")
 	else:
 		if animation.current_animation != "idle":
-			animation.play("RESET")
-			animation.advance(0)
 			animation.play("idle")
 
 	move_and_slide()
