@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cgkxyc0r2h17c" path="res://graphics/player/head.png" id="4_fjrip"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
-size = Vector2(16, 41)
+size = Vector2(99.586, 415.009)
 
 [sub_resource type="Animation" id="Animation_tuyoq"]
 length = 0.001
@@ -312,9 +312,9 @@ texture = ExtResource("4_fjrip")
 offset = Vector2(-35, -65)
 
 [node name="Collision Shape" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -20.5)
+position = Vector2(-0.770758, -207.503)
 rotation = -0.00412161
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_dqkch")
 
 [node name="Animation" type="AnimationPlayer" parent="."]
