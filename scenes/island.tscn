@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdq7lgoc85fh4"]
+
+[ext_resource type="Texture2D" uid="uid://bwu4ndcc0076o" path="res://graphics/terrain/grass.png" id="1_2v8eh"]
+[ext_resource type="Script" uid="uid://byyqaim0c272h" path="res://scripts/island-controller.gd" id="1_g61je"]
+[ext_resource type="Texture2D" uid="uid://cyewbtvbcir20" path="res://graphics/terrain/edge.png" id="3_1uhhg"]
+
+[node name="Island" type="StaticBody2D"]
+script = ExtResource("1_g61je")
+
+[node name="Polygon" type="Polygon2D" parent="."]
+texture = ExtResource("1_2v8eh")
+
+[node name="Line" type="Line2D" parent="."]
+texture = ExtResource("3_1uhhg")
+texture_mode = 1
+begin_cap_mode = 1
+end_cap_mode = 1
