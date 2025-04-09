@@ -23,6 +23,12 @@ func generate_island(polygon_node: Polygon2D) -> void:
 	collision_polygon_node.polygon = polygon_node.polygon
 	static_body_node.add_child(collision_polygon_node)
 
+	# If this is a counterclockwise polygon, reverse its points.
+	if Geometry2D.is_polygon_clockwise(polygon_node.polygon):
+		var new_polygon: PackedVector2Array = polygon_node.polygon
+		new_polygon.reverse()
+		polygon_node.polygon = new_polygon
+
 	# Create Line2D node.
 	var line_node = Line2D.new()
 	line_node.texture = edge_texture
