@@ -322,3 +322,7 @@ libraries = {
 autoplay = "idle"
 speed_scale = 1.5
 blend_times = [&"idle", &"jump", 0.5, &"idle", &"run", 0.2, &"jump", &"idle", 0.3, &"jump", &"run", 0.2, &"run", &"idle", 0.2, &"run", &"jump", 0.5]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -220)
+position_smoothing_enabled = true
