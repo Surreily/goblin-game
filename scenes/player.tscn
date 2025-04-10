@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dgg6mjmi5p0jg"]
+[gd_scene load_steps=13 format=3 uid="uid://dgg6mjmi5p0jg"]
 
 [ext_resource type="Texture2D" uid="uid://iwebq3juxpbx" path="res://graphics/player/body.png" id="1_dqkch"]
 [ext_resource type="Script" uid="uid://chvabpem8wivm" path="res://scripts/player-controller.gd" id="1_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://dh8lqv6fyde6p" path="res://graphics/player/leg.png" id="2_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://6xfc165e8xxw" path="res://graphics/player/arm.png" id="3_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://cgkxyc0r2h17c" path="res://graphics/player/head.png" id="4_fjrip"]
+[ext_resource type="Texture2D" uid="uid://2xnb314loie" path="res://graphics/lighting/light.png" id="6_tuyoq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
 size = Vector2(99.586, 415.009)
@@ -323,6 +324,11 @@ autoplay = "idle"
 speed_scale = 1.5
 blend_times = [&"idle", &"jump", 0.5, &"idle", &"run", 0.2, &"jump", &"idle", 0.3, &"jump", &"run", 0.2, &"run", &"idle", 0.2, &"run", &"jump", 0.5]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="."]
 position = Vector2(0, -220)
 position_smoothing_enabled = true
+
+[node name="Light" type="PointLight2D" parent="."]
+position = Vector2(38, -374)
+scale = Vector2(17.3594, 17.3594)
+texture = ExtResource("6_tuyoq")
