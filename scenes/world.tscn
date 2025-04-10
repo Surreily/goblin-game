@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://kfxxb840qtfh"]
+[gd_scene load_steps=9 format=3 uid="uid://kfxxb840qtfh"]
 
 [ext_resource type="PackedScene" uid="uid://dgg6mjmi5p0jg" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Script" uid="uid://uf60mg3pa4m" path="res://scripts/island-generator.gd" id="2_k0juu"]
 [ext_resource type="Texture2D" uid="uid://bwu4ndcc0076o" path="res://graphics/terrain/grass.png" id="3_71j4m"]
 [ext_resource type="Texture2D" uid="uid://cyewbtvbcir20" path="res://graphics/terrain/edge.png" id="4_qfnet"]
 [ext_resource type="PackedScene" uid="uid://cogmlebsvlj1f" path="res://scenes/background.tscn" id="5_71j4m"]
+[ext_resource type="Script" uid="uid://b35n8b3vhx1j1" path="res://scripts/water-builder.gd" id="6_i7141"]
+[ext_resource type="Texture2D" uid="uid://bfwsp0dqu45m7" path="res://graphics/terrain/water.png" id="6_qfnet"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_71j4m"]
+radius = 297.007
 
 [node name="World" type="Node2D"]
 
@@ -24,7 +29,7 @@ fill_texture = ExtResource("3_71j4m")
 edge_texture = ExtResource("4_qfnet")
 
 [node name="Island 1" type="Polygon2D" parent="Terrain"]
-polygon = PackedVector2Array(302, 395, 392, 389, 493, 394, 590, 400, 689, 388, 776, 360, 814, 320, 849, 312, 868, 292, 872, 251, 906, 241, 914, 210, 939, 202, 936, 166, 1000, 160, 1081, 160, 1138, 229, 1133, 353, 1159, 437, 1149, 521, 1030, 610, 998, 690, 917, 748, 810, 761, 709, 819, 631, 1068, 466, 1170, 412, 1276, 346, 1316, 184, 1299, 138, 1222, -5, 1210, -39, 1147, -13, 1110, 138, 1093, 289, 1108, 369, 1076, 383, 968, 303, 919, 169, 914, -45, 968, -173, 962, -267, 856, -216, 700, -222, 565, -356, 466, -384, 394, -344, 343, -239, 340, -176, 383, -150, 480, -10, 483, 35, 520, 206, 528, 292, 474)
+polygon = PackedVector2Array(302, 395, 392, 389, 493, 394, 590, 400, 689, 388, 776, 360, 814, 320, 849, 312, 868, 292, 872, 251, 906, 241, 914, 210, 939, 202, 936, 166, 1000, 160, 1081, 160, 1138, 229, 1133, 353, 1159, 437, 1149, 521, 1030, 610, 998, 690, 917, 748, 810, 761, 709, 819, 631, 1068, 466, 1170, 412, 1276, 346, 1316, 184, 1299, 138, 1222, -5, 1210, -39, 1147, -13, 1110, 138, 1093, 289, 1108, 369, 1076, 383, 968, 303, 919, 169, 914, -45, 968, -173, 962, -267, 856, -216, 700, -222, 565, -356, 466, -384, 394, -344, 343, -239, 340, -220, 414, -157, 423, -150, 480, -10, 483, 35, 520, 206, 528, 292, 474)
 
 [node name="Island 2" type="Polygon2D" parent="Terrain"]
 polygon = PackedVector2Array(816, 131, 788, 152, 736, 158, 670, 122, 629, 22, 589, 2, 549, 13, 510, 61, 456, 71, 383, 43, 341, 57, 296, 28, 252, -82, 201, -125, 47, -150, 73, -302, 279, -253, 324, -218, 333, -179, 373, -180, 383, -135, 424, -134, 445, -98, 491, -92, 560, -67, 638, -72, 697, -131, 753, -136, 768, -105, 726, -73, 742, -4, 818, -7, 823, -61, 883, -64, 941, -43, 1077, -33, 1099, 4, 1065, 53, 937, 31, 861, 68, 854, 109)
@@ -34,3 +39,28 @@ polygon = PackedVector2Array(1274, -148, 1247, -57, 1241, 59, 1284, 202, 1376, 2
 
 [node name="Darken World" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)
+
+[node name="Water" type="Node2D" parent="."]
+
+[node name="Water Area" type="Area2D" parent="Water"]
+gravity_space_override = 1
+gravity_point_center = Vector2(0, -1)
+gravity_direction = Vector2(0, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Water/Water Area"]
+position = Vector2(-749, -7)
+shape = SubResource("CircleShape2D_71j4m")
+
+[node name="Water 2" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("6_i7141")
+fill_texture = ExtResource("6_qfnet")
+edge_texture = ExtResource("4_qfnet")
+player = NodePath("../Player")
+
+[node name="Area 1" type="Polygon2D" parent="Water 2"]
+position = Vector2(-317.438, -311.949)
+scale = Vector2(1.1994, 1.50641)
+polygon = PackedVector2Array(1051, 304, 1592, 305, 1579, 616, 930, 612)
+
+[connection signal="body_entered" from="Water/Water Area" to="Player" method="_on_water_area_body_entered"]
+[connection signal="body_exited" from="Water/Water Area" to="Player" method="_on_water_area_body_exited"]

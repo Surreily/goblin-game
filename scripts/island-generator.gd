@@ -3,6 +3,7 @@ extends Node2D
 
 @export var fill_texture: Texture2D
 @export var edge_texture: Texture2D
+@export var is_water: bool
 
 func _ready() -> void:
 	for child in get_children():
@@ -10,14 +11,16 @@ func _ready() -> void:
 			generate_island(child)
 
 func generate_island(polygon_node: Polygon2D) -> void:
-	# Create StaticBody2D node.
-	var static_body_node = StaticBody2D.new()
-	add_child(static_body_node)
-	
 	# Update polygon.
 	polygon_node.texture = fill_texture
-	polygon_node.reparent(static_body_node)
+
+	# Create StaticBody2D node.
+	var static_body_node = StaticBody2D.new()
+	polygon_node.add_child(static_body_node)
 	
+	if is_water:
+		static_body_node.set_collision_layer_value(2, false)
+
 	# Create CollisionPolygon2D node.
 	var collision_polygon_node = CollisionPolygon2D.new()
 	collision_polygon_node.polygon = polygon_node.polygon
@@ -39,6 +42,5 @@ func generate_island(polygon_node: Polygon2D) -> void:
 	line_node.joint_mode = Line2D.LINE_JOINT_SHARP
 	line_node.points = PackedVector2Array(polygon_node.polygon)
 	line_node.closed = true
-	line_node.position = polygon_node.position
 	line_node.z_index = 1
 	static_body_node.add_child(line_node)
