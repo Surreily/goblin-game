@@ -32,5 +32,5 @@ polygon = PackedVector2Array(816, 131, 788, 152, 736, 158, 670, 122, 629, 22, 58
 [node name="Island 3" type="Polygon2D" parent="Terrain"]
 polygon = PackedVector2Array(1274, -148, 1247, -57, 1241, 59, 1284, 202, 1376, 221, 1385, 319, 1347, 428, 1334, 562, 1256, 640, 1234, 842, 1259, 946, 1421, 1066, 1474, 1199, 1464, 1335, 1524, 1412, 1558, 1660, 1528, 1779, 1446, 1890, 1430, 2010, 1350, 2203, 1355, 2455, 1269, 2622, 2351, 2622, 2250, -294)
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
+[node name="Darken World" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)
