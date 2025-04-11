@@ -13,6 +13,7 @@ func _ready() -> void:
 func generate_island(polygon_node: Polygon2D) -> void:
 	# Update polygon.
 	polygon_node.texture = fill_texture
+	polygon_node.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 
 	# Create StaticBody2D node.
 	var static_body_node = StaticBody2D.new()

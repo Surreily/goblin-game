@@ -7,9 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cogmlebsvlj1f" path="res://scenes/background.tscn" id="5_71j4m"]
 [ext_resource type="Script" uid="uid://b35n8b3vhx1j1" path="res://scripts/water-builder.gd" id="6_i7141"]
 [ext_resource type="Texture2D" uid="uid://bfwsp0dqu45m7" path="res://graphics/terrain/water.png" id="6_qfnet"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_71j4m"]
-radius = 297.007
+[ext_resource type="Texture2D" uid="uid://undf515nyhs" path="res://graphics/terrain/normal-edge.png" id="8_4mrxx"]
 
 [node name="World" type="Node2D"]
 
@@ -40,27 +38,13 @@ polygon = PackedVector2Array(1274, -148, 1247, -57, 1241, 59, 1284, 202, 1376, 2
 [node name="Darken World" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)
 
-[node name="Water" type="Node2D" parent="."]
-
-[node name="Water Area" type="Area2D" parent="Water"]
-gravity_space_override = 1
-gravity_point_center = Vector2(0, -1)
-gravity_direction = Vector2(0, -1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Water/Water Area"]
-position = Vector2(-749, -7)
-shape = SubResource("CircleShape2D_71j4m")
-
 [node name="Water 2" type="Node2D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("6_i7141")
 fill_texture = ExtResource("6_qfnet")
-edge_texture = ExtResource("4_qfnet")
+edge_texture = ExtResource("8_4mrxx")
 player = NodePath("../Player")
 
 [node name="Area 1" type="Polygon2D" parent="Water 2"]
 position = Vector2(-317.438, -311.949)
 scale = Vector2(1.1994, 1.50641)
 polygon = PackedVector2Array(1051, 304, 1592, 305, 1579, 616, 930, 612)
-
-[connection signal="body_entered" from="Water/Water Area" to="Player" method="_on_water_area_body_entered"]
-[connection signal="body_exited" from="Water/Water Area" to="Player" method="_on_water_area_body_exited"]
